@@ -1,0 +1,22 @@
+ARG NGINX_VERSION=1.21.0
+FROM soulteary/prebuilt-nginx-modules:base-${NGINX_VERSION} AS Builder
+
+ARG MODULE_CHECKSUM=47d1481edea2101a8f1ef0cd310a2cf9c1a7ab8f
+ARG MODULE_VERSION=master
+ARG MODULE_NAME=nginx-rtmp-module-src
+ARG MODULE_SOURCE=https://github.com/nginx-with-docker/nginx-rtmp-module-src
+
+RUN apt install unzip -y
+RUN cd /usr/src && \
+    curl -L "${MODULE_SOURCE}/archive/refs/heads/${MODULE_VERSION}.zip" -o "v${MODULE_VERSION}.zip" && \
+    echo "${MODULE_CHECKSUM}  v${MODULE_VERSION}.zip" | shasum -c && \
+    unzip "v${MODULE_VERSION}.zip" && \
+    mv "$MODULE_NAME-$MODULE_VERSION" "$MODULE_NAME" && \
+    cd /usr/src/nginx && \
+    echo $CONFARGS && \
+    ./configure --with-compat $CONFARGS --add-dynamic-module=../${MODULE_NAME}/ && \
+    make modules
+
+FROM scratch
+
+COPY --from=Builder /usr/src/nginx/objs/ngx_rtmp_module.so /
