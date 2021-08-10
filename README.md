@@ -17,6 +17,22 @@ NGINX-based Media Streaming Server
     </thead>
     <tbody>
         <tr>
+            <td>1.21.1</td>
+            <td>master (2021.05.25)</td>
+            <td><ul>
+                <li>docker pull soulteary/prebuilt-nginx-modules:ngx-1.21.1-rtmp-master</li>
+                <li>docker pull soulteary/prebuilt-nginx-modules:ngx-1.21.1-rtmp-master-alpine</li>
+            </ul></td>
+        </tr>
+        <tr>
+            <td>1.21.1</td>
+            <td>1.2.2 (2021.05.31)</td>
+            <td><ul>
+                <li>docker pull soulteary/prebuilt-nginx-modules:ngx-1.21.1-rtmp-1.2.2</li>
+                <li>docker pull soulteary/prebuilt-nginx-modules:ngx-1.21.1-rtmp-1.2.2-alpine</li>
+            </ul></td>
+        </tr>
+        <tr>
             <td>1.21.0</td>
             <td>master (2021.05.25)</td>
             <td><ul>
